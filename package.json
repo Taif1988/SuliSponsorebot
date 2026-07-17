@@ -1,0 +1,19 @@
+{
+  "name": "tg-marketplace",
+  "version": "1.0.0",
+  "description": "تطبيق إعلانات وظائف وبيع داخل تلكرام (Telegram Mini App)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "telegraf": "^4.16.3",
+    "dotenv": "^16.4.5",
+    "cors": "^2.8.5",
+    "uuid": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
