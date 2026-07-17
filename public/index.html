@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+<title>سوق البلد</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&family=Cairo:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-mark">سوق</span>
+      <span class="brand-sub">البلد</span>
+    </div>
+    <button id="myAdsBtn" class="icon-btn" title="إعلاناتي">إعلاناتي</button>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" data-type="sale">للبيع</button>
+    <button class="tab" data-type="job">وظائف</button>
+  </div>
+
+  <div class="search-row">
+    <input id="searchInput" type="text" placeholder="ابحث عن شي..." />
+  </div>
+
+  <div id="categoryChips" class="chips"></div>
+</header>
+
+<main id="feed" class="feed">
+  <div class="empty-state" id="emptyState" hidden>
+    <div class="empty-mark">📋</div>
+    <p>ما فيه إعلانات هسه بهذا التصنيف</p>
+    <p class="empty-sub">كن أول من ينشر إعلان!</p>
+  </div>
+</main>
+
+<button id="fab" class="fab">+ نشر إعلان</button>
+
+<!-- نموذج نشر إعلان -->
+<div id="postSheet" class="sheet" hidden>
+  <div class="sheet-inner">
+    <div class="sheet-header">
+      <h2>نشر إعلان جديد</h2>
+      <button class="close-btn" data-close="postSheet">✕</button>
+    </div>
+
+    <div class="sheet-body">
+      <label class="field-label">نوع الإعلان</label>
+      <div class="segmented" id="typeSegmented">
+        <button type="button" class="seg active" data-value="sale">بيع</button>
+        <button type="button" class="seg" data-value="job">وظيفة</button>
+      </div>
+
+      <label class="field-label">التصنيف</label>
+      <select id="categorySelect"></select>
+
+      <label class="field-label">العنوان</label>
+      <input id="titleInput" type="text" placeholder="مثال: آيفون 13 برو للبيع" maxlength="80" />
+
+      <label class="field-label">الوصف</label>
+      <textarea id="descInput" placeholder="اكتب تفاصيل الإعلان..." rows="4" maxlength="600"></textarea>
+
+      <label class="field-label" id="priceLabel">السعر (اختياري)</label>
+      <input id="priceInput" type="text" placeholder="مثال: 150,000 د.ع أو قابل للتفاوض" />
+
+      <label class="field-label">صورة (اختياري)</label>
+      <input id="imageInput" type="file" accept="image/*" />
+      <img id="imagePreview" hidden />
+
+      <button id="submitAdBtn" class="primary-btn">نشر الإعلان</button>
+      <p class="hint">راح يتم مراجعة إعلانك قبل ظهوره للجميع ✓</p>
+    </div>
+  </div>
+</div>
+
+<!-- تفاصيل إعلان -->
+<div id="detailSheet" class="sheet" hidden>
+  <div class="sheet-inner" id="detailContent"></div>
+</div>
+
+<!-- إعلاناتي -->
+<div id="myAdsSheet" class="sheet" hidden>
+  <div class="sheet-inner">
+    <div class="sheet-header">
+      <h2>إعلاناتي</h2>
+      <button class="close-btn" data-close="myAdsSheet">✕</button>
+    </div>
+    <div class="sheet-body" id="myAdsList"></div>
+  </div>
+</div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
