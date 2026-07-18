@@ -7,7 +7,7 @@
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&family=Cairo:wght@400;500;600&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/style.css?v=2" />
+<link rel="stylesheet" href="/css/style.css?v=3" />
 </head>
 <body>
 
@@ -33,17 +33,14 @@
   </div>
 
   <div class="search-row">
-    <input id="searchInput" type="text" data-i18n-placeholder="searchPlaceholder" placeholder="ابحث عن شي..." />
+    <input id="searchInput" type="text" data-i18n-placeholder="searchPlaceholder" placeholder="ابحث بالعنوان أو الوصف أو السعر..." />
   </div>
-
-  <label class="field-label" data-i18n="categoryLabel">التصنيف</label>
-<select id="categorySelect"></select>
 </header>
 
 <main id="feed" class="feed">
   <div class="empty-state" id="emptyState" hidden>
     <div class="empty-mark">📋</div>
-    <p data-i18n="emptyTitle">ما فيه إعلانات هسه بهذا التصنيف</p>
+    <p data-i18n="emptyTitle">ما فيه إعلانات هسه بهذا القسم</p>
     <p class="empty-sub" data-i18n="emptySub">كن أول من ينشر إعلان!</p>
   </div>
 </main>
@@ -59,17 +56,14 @@
     </div>
 
     <div class="sheet-body">
-      <label class="field-label" data-i18n="typeLabel">نوع الإعلان</label>
-      <div class="segmented" id="typeSegmented">
-        <button type="button" class="seg active" data-value="sale" data-i18n="segSale">بيع</button>
-        <button type="button" class="seg" data-value="job" data-i18n="segJob">وظيفة</button>
-      </div>
-
-      <label class="field-label" data-i18n="categoryLabel">التصنيف</label>
-      <select id="categorySelect"></select>
+      <label class="field-label" data-i18n="typeLabel">التصنيف</label>
+      <select id="typeSelect">
+        <option value="sale" data-i18n="segSale">بيع</option>
+        <option value="job" data-i18n="segJob">وظيفة</option>
+      </select>
 
       <label class="field-label" data-i18n="titleLabel">العنوان</label>
-      <input id="titleInput" type="text" data-i18n-placeholder="titlePlaceholder" placeholder="مثال: آيفون 13 برو للبيع" maxlength="80" />
+      <input id="titleInput" type="text" data-i18n-placeholder="titlePlaceholder" placeholder="مثال: صيدلية للبيع" maxlength="80" />
 
       <label class="field-label" data-i18n="descLabel">الوصف</label>
       <textarea id="descInput" data-i18n-placeholder="descPlaceholder" placeholder="اكتب تفاصيل الإعلان..." rows="4" maxlength="600"></textarea>
@@ -103,6 +97,6 @@
   </div>
 </div>
 
-<script src="/js/app.js?v=2"></script>
+<script src="/js/app.js?v=3"></script>
 </body>
 </html>
