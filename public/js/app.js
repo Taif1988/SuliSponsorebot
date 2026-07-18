@@ -1,29 +1,28 @@
+
 const tg = window.Telegram?.WebApp;
 if (tg) { tg.ready(); tg.expand(); }
-
+ 
 const initData = tg?.initData || '';
 const API = '';
-
+ 
 // ---------- الترجمات ----------
 const TRANSLATIONS = {
   ar: {
     dir: 'rtl',
-    pageTitle: 'أعلاناتي',
-    brandMark: 'أعلاناتي',
+    pageTitle: 'اعلاناتي',
+    brandMark: 'اعلاناتي',
     brandSub: '',
     myAds: 'إعلاناتي',
     tabSale: 'للبيع',
     tabJob: 'وظائف',
-    searchPlaceholder: 'ابحث عن شي...',
-    chipAll: 'الكل',
-    emptyTitle: 'ما فيه إعلانات هسه بهذا التصنيف',
+    searchPlaceholder: 'ابحث بالعنوان أو الوصف أو السعر...',
+    emptyTitle: 'ما فيه إعلانات هسه بهذا القسم',
     emptySub: 'كن أول من ينشر إعلان!',
     fabPost: '+ نشر إعلان',
     postTitle: 'نشر إعلان جديد',
     typeLabel: 'نوع الإعلان',
     segSale: 'بيع',
     segJob: 'وظيفة',
-    categoryLabel: 'التصنيف',
     titleLabel: 'العنوان',
     titlePlaceholder: 'مثال: آيفون 13 برو للبيع',
     descLabel: 'الوصف',
@@ -47,15 +46,7 @@ const TRANSLATIONS = {
     alertFillFields: 'الرجاء تعبئة العنوان والوصف',
     alertSuccess: 'تم إرسال إعلانك للمراجعة ✓',
     alertError: 'صار خطأ، حاول مرة ثانية',
-    confirmDelete: 'متأكد تبي تحذف هذا الإعلان؟',
-    categories: {
-      jobs: 'وظائف',
-      electronics: 'إلكترونيات',
-      furniture: 'أثاث',
-      vehicles: 'سيارات ومركبات',
-      realestate: 'عقارات',
-      other: 'أخرى'
-    }
+    confirmDelete: 'متأكد تبي تحذف هذا الإعلان؟'
   },
   ku: {
     dir: 'rtl',
@@ -65,8 +56,7 @@ const TRANSLATIONS = {
     myAds: 'ڕیکلامەکانم',
     tabSale: 'بۆ فرۆشتن',
     tabJob: 'کارەکان',
-    searchPlaceholder: 'شتێک بگەڕێ...',
-    chipAll: 'هەموو',
+    searchPlaceholder: 'بەپێی ناونیشان یان وردەکاری یان نرخ بگەڕێ...',
     emptyTitle: 'لە ئێستادا هیچ ڕیکلامێک نییە لەم بەشەدا',
     emptySub: 'یەکەم کەس بە کە ڕیکلام بڵاو بکاتەوە!',
     fabPost: '+ ڕیکلام بڵاوبکەرەوە',
@@ -74,7 +64,6 @@ const TRANSLATIONS = {
     typeLabel: 'جۆری ڕیکلام',
     segSale: 'فرۆشتن',
     segJob: 'کار',
-    categoryLabel: 'جۆر',
     titleLabel: 'ناونیشان',
     titlePlaceholder: 'بۆ نموونە: ئایفۆن 13 پرۆ بۆ فرۆشتن',
     descLabel: 'وردەکاری',
@@ -98,15 +87,7 @@ const TRANSLATIONS = {
     alertFillFields: 'تکایە ناونیشان و وردەکاری پڕبکەرەوە',
     alertSuccess: 'ڕیکلامەکەت بۆ پێداچوونەوە نێردرا ✓',
     alertError: 'هەڵەیەک ڕوویدا، دووبارە هەوڵبدەوە',
-    confirmDelete: 'دڵنیایت دەتەوێت ئەم ڕیکلامە بسڕیتەوە؟',
-    categories: {
-      jobs: 'کار',
-      electronics: 'ئەلیکترۆنیات',
-      furniture: 'کەلوپەلی ماڵ',
-      vehicles: 'ئۆتۆمبێل',
-      realestate: 'خانووبەرە',
-      other: 'هی تر'
-    }
+    confirmDelete: 'دڵنیایت دەتەوێت ئەم ڕیکلامە بسڕیتەوە؟'
   },
   en: {
     dir: 'ltr',
@@ -116,16 +97,14 @@ const TRANSLATIONS = {
     myAds: 'My Ads',
     tabSale: 'For Sale',
     tabJob: 'Jobs',
-    searchPlaceholder: 'Search for something...',
-    chipAll: 'All',
-    emptyTitle: 'No ads in this category yet',
+    searchPlaceholder: 'Search by title, description or price...',
+    emptyTitle: 'No ads in this section yet',
     emptySub: 'Be the first to post an ad!',
     fabPost: '+ Post Ad',
     postTitle: 'Post New Ad',
     typeLabel: 'Ad Type',
     segSale: 'Sale',
     segJob: 'Job',
-    categoryLabel: 'Category',
     titleLabel: 'Title',
     titlePlaceholder: 'e.g. iPhone 13 Pro for sale',
     descLabel: 'Description',
@@ -149,48 +128,39 @@ const TRANSLATIONS = {
     alertFillFields: 'Please fill in the title and description',
     alertSuccess: 'Your ad has been sent for review ✓',
     alertError: 'Something went wrong, please try again',
-    confirmDelete: 'Are you sure you want to delete this ad?',
-    categories: {
-      jobs: 'Jobs',
-      electronics: 'Electronics',
-      furniture: 'Furniture',
-      vehicles: 'Vehicles',
-      realestate: 'Real Estate',
-      other: 'Other'
-    }
+    confirmDelete: 'Are you sure you want to delete this ad?'
   }
 };
-
+ 
 let currentLang = localStorage.getItem('appLang') || 'ar';
-
+ 
 function t(key) {
   return TRANSLATIONS[currentLang][key] || key;
 }
-
+ 
 function applyLanguage() {
   const dict = TRANSLATIONS[currentLang];
   document.getElementById('htmlRoot').setAttribute('lang', currentLang);
   document.getElementById('htmlRoot').setAttribute('dir', dict.dir);
   document.getElementById('pageTitle').textContent = dict.pageTitle;
-
+ 
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     el.textContent = dict[el.dataset.i18n];
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
     el.placeholder = dict[el.dataset.i18nPlaceholder];
   });
-
+ 
   document.getElementById('priceLabel').textContent =
     postType === 'job' ? dict.priceLabelJob : dict.priceLabelSale;
-
+ 
   document.querySelectorAll('.lang-btn').forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.lang === currentLang);
   });
-
-  renderChips();
+ 
   loadAds();
 }
-
+ 
 document.querySelectorAll('.lang-btn').forEach((btn) => {
   btn.onclick = () => {
     currentLang = btn.dataset.lang;
@@ -198,53 +168,26 @@ document.querySelectorAll('.lang-btn').forEach((btn) => {
     applyLanguage();
   };
 });
-
+ 
 let currentType = 'sale';
-let currentCategory = null;
-let categories = [];
-
+ 
 const feed = document.getElementById('feed');
 const emptyState = document.getElementById('emptyState');
-const categoryChips = document.getElementById('categoryChips');
 const searchInput = document.getElementById('searchInput');
-
-async function loadCategories() {
-  const res = await fetch(`${API}/api/categories`);
-  categories = await res.json();
-  renderChips();
-}
-
-function renderChips() {
-  categoryChips.innerHTML = '';
-  const allChip = document.createElement('button');
-  allChip.className = 'chip' + (currentCategory === null ? ' active' : '');
-  allChip.textContent = t('chipAll');
-  allChip.onclick = () => { currentCategory = null; renderChips(); loadAds(); };
-  categoryChips.appendChild(allChip);
-
-  categories.forEach((c) => {
-    const chip = document.createElement('button');
-    chip.className = 'chip' + (currentCategory === c.id ? ' active' : '');
-    chip.textContent = categoryLabel(c.id);
-    chip.onclick = () => { currentCategory = c.id; renderChips(); loadAds(); };
-    categoryChips.appendChild(chip);
-  });
-}
-
+ 
 async function loadAds() {
   const params = new URLSearchParams({ type: currentType });
-  if (currentCategory) params.set('category', currentCategory);
   if (searchInput.value.trim()) params.set('q', searchInput.value.trim());
-
+ 
   const res = await fetch(`${API}/api/ads?${params}`);
   const ads = await res.json();
   renderFeed(ads);
 }
-
+ 
 function renderFeed(ads) {
   feed.querySelectorAll('.ad-card').forEach((el) => el.remove());
   emptyState.hidden = ads.length > 0;
-
+ 
   ads.forEach((ad) => {
     const card = document.createElement('div');
     card.className = 'ad-card';
@@ -253,7 +196,6 @@ function renderFeed(ads) {
         ${ad.image ? '' : (ad.type === 'job' ? '💼' : '🛍️')}
       </div>
       <div class="info">
-        <div class="cat-label">${categoryLabel(ad.category)}</div>
         <div class="title">${escapeHtml(ad.title)}</div>
         ${ad.price ? `<div class="price">${escapeHtml(ad.price)}</div>` : ''}
       </div>
@@ -262,18 +204,13 @@ function renderFeed(ads) {
     feed.appendChild(card);
   });
 }
-
-function categoryLabel(id) {
-  const dict = TRANSLATIONS[currentLang].categories;
-  return dict[id] || id;
-}
-
+ 
 function escapeHtml(str) {
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
 }
-
+ 
 document.querySelectorAll('.tab').forEach((tab) => {
   tab.onclick = () => {
     document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'));
@@ -282,13 +219,13 @@ document.querySelectorAll('.tab').forEach((tab) => {
     loadAds();
   };
 });
-
+ 
 let searchTimeout;
 searchInput.addEventListener('input', () => {
   clearTimeout(searchTimeout);
   searchTimeout = setTimeout(loadAds, 300);
 });
-
+ 
 function openDetail(ad) {
   const content = document.getElementById('detailContent');
   content.innerHTML = `
@@ -300,7 +237,7 @@ function openDetail(ad) {
     <div class="detail-title">${escapeHtml(ad.title)}</div>
     ${ad.price ? `<div class="detail-price">${escapeHtml(ad.price)}</div>` : ''}
     <div class="detail-desc">${escapeHtml(ad.description)}</div>
-    <div class="detail-meta">📌 ${categoryLabel(ad.category)} · ${t('postedBy')} ${escapeHtml(ad.posterName)}</div>
+    <div class="detail-meta">${t('postedBy')} ${escapeHtml(ad.posterName)}</div>
     ${
       ad.posterUsername
         ? `<a class="contact-btn" href="https://t.me/${ad.posterUsername}" target="_blank">${t('contactBtn')}</a>`
@@ -310,13 +247,12 @@ function openDetail(ad) {
   showSheet('detailSheet');
   attachCloseHandlers();
 }
-
+ 
 const typeSegmented = document.getElementById('typeSegmented');
-const categorySelect = document.getElementById('categorySelect');
 const priceLabel = document.getElementById('priceLabel');
 let postType = 'sale';
 let selectedImageBase64 = null;
-
+ 
 typeSegmented.querySelectorAll('.seg').forEach((seg) => {
   seg.onclick = () => {
     typeSegmented.querySelectorAll('.seg').forEach((s) => s.classList.remove('active'));
@@ -325,13 +261,7 @@ typeSegmented.querySelectorAll('.seg').forEach((seg) => {
     priceLabel.textContent = postType === 'job' ? t('priceLabelJob') : t('priceLabelSale');
   };
 });
-
-function fillCategorySelect() {
-  categorySelect.innerHTML = categories
-    .map((c) => `<option value="${c.id}">${categoryLabel(c.id)}</option>`)
-    .join('');
-}
-
+ 
 document.getElementById('imageInput').addEventListener('change', (e) => {
   const file = e.target.files[0];
   if (!file) return;
@@ -355,18 +285,17 @@ document.getElementById('imageInput').addEventListener('change', (e) => {
   };
   reader.readAsDataURL(file);
 });
-
+ 
 document.getElementById('submitAdBtn').onclick = async () => {
   const title = document.getElementById('titleInput').value.trim();
   const description = document.getElementById('descInput').value.trim();
   const price = document.getElementById('priceInput').value.trim();
-  const category = categorySelect.value;
-
+ 
   if (!title || !description) {
     alert(t('alertFillFields'));
     return;
   }
-
+ 
   const res = await fetch(`${API}/api/ads`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -376,11 +305,10 @@ document.getElementById('submitAdBtn').onclick = async () => {
       title,
       description,
       price,
-      category,
       image: selectedImageBase64
     })
   });
-
+ 
   const data = await res.json();
   if (data.success) {
     alert(t('alertSuccess'));
@@ -394,12 +322,12 @@ document.getElementById('submitAdBtn').onclick = async () => {
     alert(data.error || t('alertError'));
   }
 };
-
+ 
 document.getElementById('myAdsBtn').onclick = async () => {
   const res = await fetch(`${API}/api/my-ads?initData=${encodeURIComponent(initData)}`);
   const ads = await res.json();
   const list = document.getElementById('myAdsList');
-
+ 
   if (ads.length === 0) {
     list.innerHTML = `<p style="text-align:center;color:rgba(35,41,31,0.5);padding:30px 0;">${t('noMyAds')}</p>`;
   } else {
@@ -418,14 +346,14 @@ document.getElementById('myAdsBtn').onclick = async () => {
       )
       .join('');
   }
-
+ 
   showSheet('myAdsSheet');
 };
-
+ 
 function statusLabel(status) {
   return { pending: t('statusPending'), approved: t('statusApproved'), rejected: t('statusRejected') }[status] || status;
 }
-
+ 
 async function deleteAd(id) {
   if (!confirm(t('confirmDelete'))) return;
   await fetch(`${API}/api/ads/${id}`, {
@@ -435,7 +363,7 @@ async function deleteAd(id) {
   });
   document.getElementById('myAdsBtn').click();
 }
-
+ 
 function showSheet(id) {
   document.querySelectorAll('.sheet').forEach((s) => (s.hidden = true));
   document.getElementById(id).hidden = false;
@@ -448,16 +376,14 @@ function attachCloseHandlers() {
     btn.onclick = () => closeSheet(btn.dataset.close);
   });
 }
-
+ 
 document.getElementById('fab').onclick = () => {
-  fillCategorySelect();
   showSheet('postSheet');
 };
-
+ 
 attachCloseHandlers();
-
-(async function init() {
+ 
+(function init() {
   applyLanguage();
-  await loadCategories();
-  await loadAds();
+  loadAds();
 })();
