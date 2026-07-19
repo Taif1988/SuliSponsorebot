@@ -80,14 +80,15 @@ function renderList(ads) {
         <div class="admin-title">${escapeHtml(ad.title)} ${ad.price ? `— ${escapeHtml(ad.price)}` : ''}</div>
         <div class="admin-desc">${escapeHtml(ad.description)}</div>
         <div class="admin-meta">بواسطة ${escapeHtml(ad.posterName)} ${ad.posterUsername ? `(@${ad.posterUsername})` : ''} · ${ad.type === 'job' ? 'وظيفة' : 'بيع'}</div>
-        ${
-          currentStatus === 'pending'
-            ? `<div class="admin-actions">
-                <button class="btn-approve" onclick="moderateAd('${ad.id}', 'approve')">✓ قبول</button>
-                <button class="btn-reject" onclick="moderateAd('${ad.id}', 'reject')">✕ رفض</button>
-              </div>`
-            : ''
-        }
+        <div class="admin-actions">
+          ${
+            currentStatus === 'pending'
+              ? `<button class="btn-approve" onclick="moderateAd('${ad.id}', 'approve')">✓ قبول</button>
+                 <button class="btn-reject" onclick="moderateAd('${ad.id}', 'reject')">✕ رفض</button>`
+              : ''
+          }
+          <button class="btn-delete" onclick="deleteAd('${ad.id}')">🗑 حذف نهائي</button>
+        </div>
       </div>
     </div>
   `
@@ -98,6 +99,15 @@ function renderList(ads) {
 async function moderateAd(id, action) {
   await fetch(`/api/admin/ads/${id}/${action}`, {
     method: 'POST',
+    headers: { 'X-Admin-Token': adminToken }
+  });
+  loadAds();
+}
+
+async function deleteAd(id) {
+  if (!confirm('متأكد تريد تحذف هذا الإعلان نهائياً؟ لا تستطيع استرجاعه.')) return;
+  await fetch(`/api/admin/ads/${id}`, {
+    method: 'DELETE',
     headers: { 'X-Admin-Token': adminToken }
   });
   loadAds();
